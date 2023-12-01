@@ -143,9 +143,11 @@ _pool_type_to_flags(POOL_TYPE pool_type, bool initialize)
     case PagedPoolCacheAligned:
         return (cxplat_pool_flags_t)(pool_flags | CXPLAT_POOL_FLAG_PAGED | CXPLAT_POOL_FLAG_CACHE_ALIGNED);
     default:
-        // Others not yet implemented.
+        // Others not yet implemented -> bug check.
         KeBugCheckCPP(BAD_POOL_CALLER);
+#ifdef _DEBUG
         return CXPLAT_POOL_FLAG_NONE;
+#endif
     }
 }
 
